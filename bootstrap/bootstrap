@@ -748,6 +748,9 @@ Linux)
 	elif grep -sq '^CHROMEOS_RELEASE_NAME' /etc/lsb-release; then
 		need_awk=yes
 		need_sed=yes
+	elif grep -sq openwrt /etc/os-release; then
+		groupsprog="id -Gn"
+		whoamiprog="id -un"
 	fi
 	machine_arch=`uname -m`
 	# Override machine_arch where required.
