@@ -726,6 +726,13 @@ IRIX*)
 	fi
 	;;
 Linux)
+	# Some distros, eg. OpenWRT provides no `whoami` and `groups` by default:
+	if ! groups 2>/dev/null; then
+		groupsprog="id -gn"
+	fi
+	if ! whoami 2>/dev/null; then
+		whoamiprog="id -un"
+	fi
 	# XXX This was added in 2010 to handle Linux distros that use "wheel"
 	# for root's group. It's a hack, since it only supports (apparently
 	# now defunct) SSD Linux.
