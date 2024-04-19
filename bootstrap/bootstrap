@@ -749,6 +749,13 @@ Linux)
 		need_awk=yes
 		need_sed=yes
 	fi
+	# Some distros, eg. OpenWRT provide no groups(1), whoami(1) by default:
+	if ! groups >/dev/null 2>&1; then
+		groupsprog="id -gn"
+	fi
+	if ! whoami >/dev/null 2>&1; then
+		whoamiprog="id -un"
+	fi
 	machine_arch=`uname -m`
 	# Override machine_arch where required.
 	case "$machine_arch" in
